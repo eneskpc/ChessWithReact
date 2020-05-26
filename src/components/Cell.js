@@ -8,17 +8,25 @@ const theme = getTheme();
 
 export class Cell extends Component {
   piece_onClick = (e) => {
-    const relatedPiece = this.props.Pieces.find((p) => p.selected);
+    let relatedPiece = this.props.Pieces.find((p) => p.selected);
     if (relatedPiece && relatedPiece.location !== this.props.Piece.location) {
       this.props.dispatch({
         type: ActionTypes.MovePiece,
         payload: this.props.Piece.location,
       });
+      relatedPiece = this.props.Pieces.find((p) => p.selected);
+      if (!relatedPiece) {
+        this.props.dispatch({
+          type: ActionTypes.ChangeTeam,
+        });
+      }
     } else {
-      this.props.dispatch({
-        type: ActionTypes.SelectPiece,
-        payload: this.props.Piece.location,
-      });
+      if (this.props.Piece.team === this.props.CurrentTeam) {
+        this.props.dispatch({
+          type: ActionTypes.SelectPiece,
+          payload: this.props.Piece.location,
+        });
+      }
     }
   };
 

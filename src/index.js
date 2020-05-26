@@ -9,13 +9,16 @@ import { createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
 import PieceReducer from "./reducers/PieceReducer";
 import ActionTypes from "./ActionTypes";
+import TeamReducer from "./reducers/TeamReducer";
 
 const RootReducer = combineReducers({
   Pieces: PieceReducer,
+  CurrentTeam: TeamReducer,
 });
 
 const store = createStore(RootReducer, {
   Pieces: [],
+  CurrentTeam: "white",
 });
 
 store.dispatch({ type: ActionTypes.ResetGame });

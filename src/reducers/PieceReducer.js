@@ -1,6 +1,6 @@
 import ActionTypes from "../ActionTypes";
 
-const PieceRule = (piece, newLocation) => {
+export const PieceRule = (piece, newLocation) => {
   switch (piece.type) {
     case "Pawn":
       return (
@@ -13,6 +13,7 @@ const PieceRule = (piece, newLocation) => {
 };
 
 const PieceReducer = (state = [], { type, payload }) => {
+  let relatedPiece = null;
   switch (type) {
     case ActionTypes.MoviePiece:
       return state;
@@ -149,7 +150,7 @@ const PieceReducer = (state = [], { type, payload }) => {
       if (!state.find((p) => p.location === payload)) {
         return state;
       }
-      var relatedPiece = state.find((p) => p.location === payload);
+      relatedPiece = state.find((p) => p.location === payload);
       relatedPiece.selected = !relatedPiece.selected;
       state = state.filter((p) => p.location !== payload);
       state = [...state, relatedPiece];
@@ -158,7 +159,7 @@ const PieceReducer = (state = [], { type, payload }) => {
       if (state.find((p) => p.location === payload)) {
         return state;
       }
-      var relatedPiece = state.find((p) => p.selected);
+      relatedPiece = state.find((p) => p.selected);
       if (PieceRule(relatedPiece, payload)) {
         state = state.filter((p) => p.location !== relatedPiece.location);
         relatedPiece.selected = false;
