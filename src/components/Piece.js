@@ -15,7 +15,6 @@ class Piece extends Component {
       }, 1px 0 ${
         team === "white" ? theme.palette.themeDarker : "#fff"
       }, 0 -1px ${team === "white" ? theme.palette.themeDarker : "#fff"}`,
-      fontSize: "30px",
     };
 
     switch (pieceType) {
@@ -34,7 +33,7 @@ class Piece extends Component {
       default:
         return (
           <i
-            className="fas fa-circle"
+            className="fas fa-chess"
             style={{ ...style, color: "transparent", textShadow: "none" }}
           ></i>
         );

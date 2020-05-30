@@ -1,22 +1,12 @@
 import ActionTypes from "../ActionTypes";
-
-export const PieceRule = (piece, newLocation) => {
-  switch (piece.type) {
-    case "Pawn":
-      return (
-        (piece.team === "white" && newLocation + 8 === piece.location) ||
-        (piece.team === "black" && newLocation - 8 === piece.location)
-      );
-    default:
-      return false;
-  }
-};
+import { PieceRule } from "../Helpers";
 
 const PieceReducer = (state = [], { type, payload }) => {
   let relatedPiece = null;
   switch (type) {
     case ActionTypes.MoviePiece:
       return state;
+
     case ActionTypes.ResetGame:
       let pieces = [
         {
@@ -80,6 +70,16 @@ const PieceReducer = (state = [], { type, payload }) => {
           },
         ];
       }
+
+      pieces = [
+        ...pieces,
+        {
+          location: 48,
+          type: "Knight",
+          team: "white",
+          selected: false,
+        },
+      ];
 
       for (let index = 49; index <= 56; index++) {
         pieces = [
@@ -146,6 +146,7 @@ const PieceReducer = (state = [], { type, payload }) => {
       ];
 
       return pieces;
+
     case ActionTypes.SelectPiece:
       if (!state.find((p) => p.location === payload)) {
         return state;
@@ -155,6 +156,7 @@ const PieceReducer = (state = [], { type, payload }) => {
       state = state.filter((p) => p.location !== payload);
       state = [...state, relatedPiece];
       return state;
+
     case ActionTypes.MovePiece:
       if (state.find((p) => p.location === payload)) {
         return state;
@@ -167,6 +169,7 @@ const PieceReducer = (state = [], { type, payload }) => {
         state = [...state, relatedPiece];
       }
       return state;
+
     default:
       return state;
   }

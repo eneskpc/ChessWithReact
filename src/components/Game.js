@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import Cell from "./Cell";
 import { connect } from "react-redux";
 import { PrimaryButton } from "@fluentui/react";
-import ActionTypes from "../ActionTypes";
 import { getTheme } from "@fluentui/react";
+import { ResetGame } from "../Helpers";
+import "../styles/Game.scss";
 
 const theme = getTheme();
 
@@ -13,7 +14,9 @@ class Game extends Component {
     for (let index = 1; index <= 64; index++) {
       const realtedPiece = this.props.Pieces.find(
         (p) => p.location === index
-      ) || { location: index };
+      ) || {
+        location: index,
+      };
       let backColor = "#fff";
       if (realtedPiece && realtedPiece.selected) {
         backColor = theme.palette.themeTertiary;
@@ -52,7 +55,6 @@ class Game extends Component {
       }, 0 -1px ${
         this.props.CurrentTeam === "white" ? theme.palette.themeDarker : "#fff"
       }`,
-      fontSize: "30px",
     };
 
     return (
@@ -71,9 +73,7 @@ class Game extends Component {
           >
             <PrimaryButton
               onClick={() => {
-                this.props.dispatch({
-                  type: ActionTypes.ResetGame,
-                });
+                ResetGame(this.props.dispatch);
               }}
             >
               Yeni Oyun
