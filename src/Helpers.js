@@ -32,6 +32,17 @@ export const PieceRule = (piece, newLocation) => {
         piece.location % 8 === newLocation % 8 ||
         (newLocation > minValueInRow && newLocation <= maxValueInRow)
       );
+    case "Knight":
+      return (
+        newLocation === piece.location - 17 ||
+        newLocation === piece.location - 15 ||
+        newLocation === piece.location - 10 ||
+        newLocation === piece.location - 6 ||
+        newLocation === piece.location + 6 ||
+        newLocation === piece.location + 10 ||
+        newLocation === piece.location + 15 ||
+        newLocation === piece.location + 17
+      );
     default:
       return false;
   }
