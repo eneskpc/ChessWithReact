@@ -43,6 +43,11 @@ export const PieceRule = (piece, newLocation) => {
         newLocation === piece.location + 15 ||
         newLocation === piece.location + 17
       );
+    case "Bishop":
+      return (
+        (piece.location - newLocation) % 9 === 0 ||
+        (piece.location - newLocation) % 7 === 0
+      );
     default:
       return false;
   }

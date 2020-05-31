@@ -75,7 +75,7 @@ const PieceReducer = (state = [], { type, payload }) => {
         ...pieces,
         {
           location: 48,
-          type: "Knight",
+          type: "Bishop",
           team: "white",
           selected: false,
         },
